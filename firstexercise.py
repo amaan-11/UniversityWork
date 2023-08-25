@@ -1,1 +1,2 @@
-print("Hello, Mohammed Amaan!")
+name=input("Enter your name: ")
+print("Hello,",name,"!")
