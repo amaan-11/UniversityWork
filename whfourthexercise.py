@@ -1,5 +1,5 @@
 import random
-number=random.randrange(0,10)
+number=random.randrange(0,11)
 guess=-1
 while guess!=number:
     guess=int(input("Enter your guess"))
