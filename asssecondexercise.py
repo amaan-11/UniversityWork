@@ -1,6 +1,7 @@
 class Elevator:
 
-    def __init__(self,bottom,top,current):
+    def __init__(self,name,bottom,top,current):
+        self.name=name
         self.bottom=bottom
         self.top=top
         self.current=current
@@ -28,8 +29,19 @@ class Elevator:
         for i in range(self.current):
             self.floor_down()
 
+class Building:
+
+    def __init__(self,bottom,top,num_elevators):
+        self.bottom=bottom
+        self.top=top
+        self.num_elevators=num_elevators
+        self.elevators= [Elevator('Elevator' + str(i + 1),self.bottom,self.top,0) for i in range(self.num_elevators)]
+    def run_elevator(self,elevator_num,target):
+        self.elevators[elevator_num-1].go_to_floor(target)
 
 #main
-elevator=Elevator(0,10,0)
-target=int(input("What floor would you like to go to?"))
-elevator.go_to_floor(target
+empirestate=Building(0,300,5)
+print(empirestate.elevators[0].name)
+elevator_num=int(input("Enter the elevator number you want to use."))
+target=int(input("Enter the floor you'd like to go to."))
+empirestate.run_elevator(elevator_num,target)
