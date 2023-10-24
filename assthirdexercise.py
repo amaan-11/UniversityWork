@@ -26,7 +26,6 @@ class Elevator:
         print("Destination Floor reached, Please exit")
 
 
-
 class Building:
 
     def __init__(self,bottom,top,num_elevators):
@@ -36,9 +35,14 @@ class Building:
         self.elevators= [Elevator('Elevator' + str(i + 1),self.bottom,self.top,0) for i in range(self.num_elevators)]
     def run_elevator(self,elevator_num,target):
         self.elevators[elevator_num-1].go_to_floor(target)
+    def firealarm(self):
+        print("PLEASE EVACUATE THE BUILDING I REPEAT PLEASE EVACUATE THE BUILDING")
+        for i in range(self.num_elevators):
+            self.elevators[i].go_to_floor(0)
 
 #main
 empirestate=Building(0,300,5)
 elevator_num=int(input("Enter the elevator number you want to use."))
 target=int(input("Enter the floor you'd like to go to."))
 empirestate.run_elevator(elevator_num,target)
+empirestate.firealarm()

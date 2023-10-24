@@ -21,12 +21,9 @@ class Elevator:
                 self.floor_up()
         elif target<self.current:
             for i in range(self.current-target):
-                self.floor_up(self.current)
+                self.floor_up()
         print("Destination Floor reached, Please exit")
-        self.reset_floor()
-    def reset_floor(self):
-        for i in range(self.current):
-            self.floor_down()
+
 
 
 #main
