@@ -27,6 +27,8 @@ class Car:
         if self.travelled_dist+(self.curr_speed*time)<=race_distance:
             self.travelled_dist=self.travelled_dist+(self.curr_speed*time)
             print(f"The car has now travelled {self.travelled_dist}")
+        else:
+            self.travelled_dist=race_distance
 
 class Race:
     def __init__(self,name,race_distance):
@@ -34,21 +36,36 @@ class Race:
         self.name=name
         self.race_distance=race_distance
 
-    def race_happen(self):
-        vroom=True
-        while vroom==True:
-            for car in self.car_list:
-                if car.travelled_dist == self.race_distance:
-                    print(car.reg_num,"has finished first, they've won the race!!!")
-                    vroom=False
-                    break
-                car.accelarate(random.randint(-10, 15))
-                car.drive(1,self.race_distance)
-        def race_results():
-            print("Registration Number","Maximum Speed", "Current Speed","Travelled Distances",sep="|")
-            for car in self.car_list:
-                car.print_deets()
-        race_results()
-f1=Race("Abu Dhabi GP 2023",306)
-f1.race_happen()
+    def hour_passes(self,car):
+        car.accelarate(random.randint(-10, 15))
+        car.drive(1, self.race_distance)
+    def race_finished(self,car):
+        if car.travelled_dist == self.race_distance:
+            return False
+    def print_status(self):
+        print("Registration Number", "Maximum Speed", "Current Speed", "Travelled Distances", sep="|")
+        for car in self.car_list:
+            car.print_deets()
+    def race_results(self):
+        print("Registration Number","Maximum Speed", "Current Speed","Travelled Distances",sep="|")
+        for car in self.car_list:
+            if car.travelled_dist==self.race_distance:
+                print("(----------Winner------------)")
+            car.print_deets()
+            if car.travelled_dist==self.race_distance:
+                print("(----------Winner------------)")
 
+gdd=Race("Grand Demolition Derby",800)
+race_hours=0
+vroom = True
+while vroom == True:
+    for car in gdd.car_list:
+        gdd.hour_passes(car)
+        if gdd.race_finished(car) == False:
+            print(car.reg_num, "has finished first, they've won the race!!!")
+            vroom = False
+            break
+    race_hours+=1
+    if race_hours%10:
+        gdd.print_status()
+gdd.race_results()
